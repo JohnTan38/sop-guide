@@ -2,6 +2,7 @@
 
 import React, { useState } from 'react';
 import { Search, Download, ChevronLeft, ChevronRight, FileText, Users, Lock, Key, Activity } from 'lucide-react';
+import Image from '/next/image';
 
 // Type definitions
 interface SopPage {
@@ -504,11 +505,7 @@ export default function EnhancedSopGuide() {
                 {page.image && (
                   <div className="lg:col-span-2">
                     <div className="bg-gray-50 p-4 rounded-xl">
-                      <img
-                        src={imageSources[page.image]}
-                        alt={page.title}
-                        className="w-full h-auto rounded-lg shadow-sm"
-                      />
+                      <Image src="/my-image.jpg" alt="Description" width={500} height={500} />
                     </div>
                   </div>
                 )}
