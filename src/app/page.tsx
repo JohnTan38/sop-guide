@@ -3,6 +3,8 @@
 import React, { useState } from 'react';
 import { Search, Download, ChevronLeft, ChevronRight, FileText, Users, Lock, Key, Activity } from 'lucide-react';
 import Image from 'next/image';
+import { LucideProps, Search, Download, ... } from 'lucide-react'; // Add LucideProps import
+
 
 // Type definitions
 interface SopPage {
@@ -14,7 +16,7 @@ interface SopPage {
     text: string;
   }[];
   image?: string;
-  icon?: React.ComponentType<React.SVGProps<SVGSVGElement>>; // Use a more specific type for the SVG component
+  icon?: React.ComponentType<LucideProps>; // Change the type here
 }
 
 interface EskerSubPage {
