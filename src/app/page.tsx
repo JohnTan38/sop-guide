@@ -3,7 +3,7 @@
 import React, { useState } from 'react';
 import { Search, Download, ChevronLeft, ChevronRight, FileText, Users, Lock, Key, Activity } from 'lucide-react';
 import Image from 'next/image';
-import { LucideProps, Search, Download, ... } from 'lucide-react'; // Add LucideProps import
+import { LucideProps, Search, Download } from 'lucide-react'; // Add LucideProps import
 
 
 // Type definitions
