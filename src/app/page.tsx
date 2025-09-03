@@ -14,7 +14,7 @@ interface SopPage {
     text: string;
   }[];
   image?: string;
-  icon?: React.ComponentType<any>;
+  icon?: React.ComponentType<React.SVGProps<SVGSVGElement>>; // Use a more specific type for the SVG component
 }
 
 interface EskerSubPage {
