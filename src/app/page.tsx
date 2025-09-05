@@ -2,8 +2,6 @@
 
 import React, { useState } from 'react';
 import { LucideProps, Search, Download, ChevronLeft, ChevronRight, FileText, Users, Lock, Key, Activity } from 'lucide-react';
-import Image from 'next/image';
-// Add LucideProps import
 
 // Type definitions
 interface SopPage {
@@ -15,7 +13,7 @@ interface SopPage {
     text: string;
   }[];
   image?: string;
-  icon?: React.ComponentType<LucideProps>; // Change the type here
+  icon?: React.ComponentType<LucideProps>;
 }
 
 interface EskerSubPage {
@@ -41,7 +39,7 @@ const sopData: SopPage[] = [
         text: 'Select the appropriate profile from the dropdown and assign relevant groups to the new user.',
       },
     ],
-    image: 'create_new_user.jpg',
+    image: 'https://iili.io/KBpgFRe.jpg',
   },
   {
     id: 2,
@@ -58,7 +56,7 @@ const sopData: SopPage[] = [
         text: 'To lock the user account, check the "Lock login" checkbox and click the "Save" button.',
       },
     ],
-    image: 'lock_user_account.jpg',
+    image: 'https://iili.io/KBpbS2a.jpg',
   },
   {
     id: 3,
@@ -71,7 +69,7 @@ const sopData: SopPage[] = [
         text: 'The administrator can Resend the welcome email or send an email link to Reset password on the user\'s behalf. The reset password email contains an URL to the reset password page.',
       },
     ],
-    image: 'reset_user_password.jpg',
+    image: 'https://iili.io/KBy9CyG.jpg',
   },
   {
     id: 4,
@@ -88,7 +86,7 @@ const sopData: SopPage[] = [
         text: 'A detailed diagram illustrating the system architecture. This diagram can be interacted with to view different parts of the system.',
       },
     ],
-    image: 'schematic_layout.jpg',
+    image: "https://iili.io/KByJkEN.jpg",
   },
 ];
 
@@ -306,15 +304,6 @@ const eskerPage: SopPage = {
   ],
 };
 
-// Image sources mapping
-const imageSources: { [key: string]: string } = {
-  'create_new_user.jpg': '/create_new_user.jpg',
-  'lock_user_account.jpg': '/lock_user_account.jpg',
-  'reset_user_password.jpg': '/reset_user_password.jpg',
-  'schematic_layout.jpg': '/schematic_layout.jpg',
-  'components_workflow_esker.png': '/components_workflow_esker.png',
-};
-
 export default function EnhancedSopGuide() {
   const [currentPage, setCurrentPage] = useState(0);
   const [searchQuery, setSearchQuery] = useState('');
@@ -506,7 +495,11 @@ export default function EnhancedSopGuide() {
                 {page.image && (
                   <div className="lg:col-span-2">
                     <div className="bg-gray-50 p-4 rounded-xl">
-                      <Image src="/my-image.jpg" alt="Description" width={500} height={500} />
+                      <img
+                        src={page.image}
+                        alt={page.title}
+                        className="w-full h-auto rounded-lg shadow-sm"
+                      />
                     </div>
                   </div>
                 )}
