@@ -1,7 +1,8 @@
+// ...existing code...
 "use client";
 
 import React, { useState } from 'react';
-import { LucideProps, Search, Download, ChevronLeft, ChevronRight, FileText, Users, Lock, Key, Activity } from 'lucide-react';
+import { LucideProps, Search, Download, ChevronLeft, ChevronRight, FileText, Users, Lock, Key, Activity, Database } from 'lucide-react';
 
 // Type definitions
 interface SopPage {
@@ -290,9 +291,79 @@ const eskerSubPages: EskerSubPage[] = [
   },
 ];
 
-// Create ESKER page combining both sub-pages
+// Master Data Update Sub-pages (integrated from master_data_update_tabs.jsx)
+const masterDataSubPages: EskerSubPage[] = [
+  {
+    id: 'export',
+    title: 'Export Master Data',
+    content: (
+      <div className="space-y-8">
+        <div className="bg-gradient-to-r from-blue-50 to-indigo-50 p-6 rounded-xl border-l-4 border-indigo-500">
+          <h3 className="text-2xl font-bold text-indigo-800 mb-4">Export Master Data</h3>
+          <p className="text-gray-700 text-lg leading-relaxed">
+            Click the <strong>Export to CSV</strong> button. Wait for the My Data Downloads page to display status <strong>Success</strong>. Download the CSV file. Note that backups are automatically removed from the system after 2 months.
+          </p>
+        </div>
+        <div className="bg-gray-50 p-4 rounded-xl space-y-4">
+          <img src="https://sop-guide-five-vercel.app/master_data_update_1.png" alt="Export Master Data" className="w-full h-auto rounded-lg shadow-sm" />
+        </div>
+      </div>
+    ),
+  },
+  {
+    id: 'modify',
+    title: 'Modify Data in Template',
+    content: (
+      <div className="space-y-8">
+        <div className="bg-gradient-to-r from-green-50 to-emerald-50 p-6 rounded-xl border-l-4 border-green-500">
+          <h3 className="text-2xl font-bold text-green-800 mb-4">Modify Data in Template</h3>
+          <p className="text-gray-700 text-lg leading-relaxed">
+            Use the provided Excel template to insert or modify rows. Always include the full set of data when saving. After editing, save the file as <strong>CSV UTF-8 (Comma delimited)</strong>.
+          </p>
+        </div>
+        <div className="bg-gray-50 p-4 rounded-xl space-y-4">
+          <img src="https://sop-guide-five-vercel.app/master_data_update_2.png" alt="Modify Master Data" className="w-full h-auto rounded-lg shadow-sm" />
+        </div>
+      </div>
+    ),
+  },
+  {
+    id: 'import',
+    title: 'Import Guidelines',
+    content: (
+      <div className="space-y-8">
+        <div className="bg-gradient-to-r from-yellow-50 to-orange-50 p-6 rounded-xl border-l-4 border-yellow-500">
+          <h3 className="text-2xl font-bold text-yellow-800 mb-4">Import Guidelines</h3>
+          <p className="text-gray-700 text-lg leading-relaxed">
+            Refer to the process guidelines in <strong>process_guidelines_vendor_and_GL.txt</strong> for Vendor and GL updates. Ensure compliance before final import.
+          </p>
+        </div>
+      </div>
+    ),
+  },
+];
+
+// Master Data Update Page with Sub-navigation
+const masterDataPage: SopPage = {
+  id: 4, // will be kept as the 4th item after we reindex sopData below
+  title: 'Master Data Update',
+  subtitle: 'Procedure for exporting, modifying, and re-importing master data.',
+  icon: Database,
+  content: [
+    {
+      heading: 'Overview',
+      text: 'This section covers the export, modification, and import process for Master Data updates.'
+    },
+  ],
+};
+
+// Insert masterDataPage into sopData as 4th item and reindex all sopData ids
+sopData.splice(3, 0, masterDataPage);
+sopData.forEach((p, idx) => { p.id = idx + 1; });
+
+// Create ESKER page combining both sub-pages; set id dynamically after sopData reindex
 const eskerPage: SopPage = {
-  id: 5,
+  id: sopData.length + 1,
   title: 'ESKER System Overview',
   subtitle: 'Comprehensive overview of the ESKER invoice processing system.',
   icon: FileText,
@@ -308,6 +379,7 @@ export default function EnhancedSopGuide() {
   const [currentPage, setCurrentPage] = useState(0);
   const [searchQuery, setSearchQuery] = useState('');
   const [eskerSubPage, setEskerSubPage] = useState('purpose');
+  const [masterSubPage, setMasterSubPage] = useState('export');
 
   // Combine all pages including ESKER
   const allPages = [...sopData, eskerPage];
@@ -341,8 +413,12 @@ export default function EnhancedSopGuide() {
 
   const handlePageSelect = (index: number) => {
     setCurrentPage(index);
-    if (filteredPages[index].id === 5) {
+    const selectedId = filteredPages[index].id;
+    if (selectedId === eskerPage.id) {
       setEskerSubPage('purpose');
+    }
+    if (selectedId === 4) {
+      setMasterSubPage('export');
     }
   };
 
@@ -462,8 +538,29 @@ export default function EnhancedSopGuide() {
               </div>
             </div>
 
+            {/* Master Data sub-navigation */}
+            {page.id === 4 && (
+              <div className="print-hidden mb-8">
+                <div className="flex space-x-2 bg-gray-100 p-2 rounded-xl">
+                  {masterDataSubPages.map((subPage) => (
+                    <button
+                      key={subPage.id}
+                      onClick={() => setMasterSubPage(subPage.id)}
+                      className={`px-4 py-2 rounded-lg transition-all duration-300 ${
+                        masterSubPage === subPage.id
+                          ? 'bg-indigo-600 text-white shadow-md'
+                          : 'text-gray-600 hover:bg-white hover:shadow-sm'
+                      }`}
+                    >
+                      {subPage.title}
+                    </button>
+                  ))}
+                </div>
+              </div>
+            )}
+
             {/* ESKER System sub-navigation */}
-            {page.id === 5 && (
+            {page.id === eskerPage.id && (
               <div className="print-hidden mb-8">
                 <div className="flex space-x-2 bg-gray-100 p-2 rounded-xl">
                   {eskerSubPages.map((subPage) => (
@@ -484,10 +581,15 @@ export default function EnhancedSopGuide() {
             )}
 
             {/* Content Area */}
-            {page.id === 5 ? (
+            {page.id === eskerPage.id ? (
               // ESKER System content
               <div className="mb-8">
                 {eskerSubPages.find(subPage => subPage.id === eskerSubPage)?.content}
+              </div>
+            ) : page.id === 4 ? (
+              // Master Data content
+              <div className="mb-8">
+                {masterDataSubPages.find(subPage => subPage.id === masterSubPage)?.content}
               </div>
             ) : (
               // Regular SOP content
@@ -568,3 +670,4 @@ export default function EnhancedSopGuide() {
     </div>
   );
 }
+// ...existing code...
