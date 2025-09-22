@@ -305,7 +305,7 @@ const masterDataSubPages: EskerSubPage[] = [
           </p>
         </div>
         <div className="bg-gray-50 p-4 rounded-xl space-y-4">
-          <img src="https://sop-guide-five-vercel.app/master_data_update_1.png" alt="Export Master Data" className="w-full h-auto rounded-lg shadow-sm" />
+          <img src="https://iili.io/KaBdawP.png" alt="master_data_update_1" className="w-full h-auto rounded-lg shadow-sm" />
         </div>
       </div>
     ),
@@ -322,7 +322,7 @@ const masterDataSubPages: EskerSubPage[] = [
           </p>
         </div>
         <div className="bg-gray-50 p-4 rounded-xl space-y-4">
-          <img src="https://sop-guide-five-vercel.app/master_data_update_2.png" alt="Modify Master Data" className="w-full h-auto rounded-lg shadow-sm" />
+          <img src="https://iili.io/KaB23WF.png" alt="modify_master_data_2" className="w-full h-auto rounded-lg shadow-sm" />
         </div>
       </div>
     ),
@@ -337,6 +337,9 @@ const masterDataSubPages: EskerSubPage[] = [
           <p className="text-gray-700 text-lg leading-relaxed">
             Refer to the process guidelines in <strong>process_guidelines_vendor_and_GL.txt</strong> for Vendor and GL updates. Ensure compliance before final import.
           </p>
+        </div>
+        <div className="bg-gray-50 p-4 rounded-xl space-y-4">
+          <img src="https://iili.io/KaB2O5Q.png" alt="import_master_data_3" className="w-full h-auto rounded-lg shadow-sm" />
         </div>
       </div>
     ),
