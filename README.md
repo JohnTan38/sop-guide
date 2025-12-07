@@ -39,11 +39,13 @@ This repository is organized to help you find specific procedural guides quickly
 🛠 Troubleshooting & FAQ
 If the Invoice Recognition service fails or data sync hangs:
 
-Check File Formats: Ensure vendors are submitting standard PDFs or TIFFs. Encrypted or password-protected files will fail the ingestion layer.
-Verify PO Status: Confirm the Purchase Order is "Released" in the ERP; otherwise, the 3-way match will fail validation.
-Clear Browser Cache: If the Web Interface (SaaS) is lagging, clear your local cache and cookies.
+- Check File Formats: Ensure vendors are submitting standard PDFs or TIFFs. Encrypted or password-protected files will fail the ingestion layer.
+- Verify PO Status: Confirm the Purchase Order is "Released" in the ERP; otherwise, the 3-way match will fail validation.
+- Clear Browser Cache: If the Web Interface (SaaS) is lagging, clear your local cache and cookies.
+
 🤝 Support
 For technical incidents involving API connectivity or server downtime, please submit a ticket via the internal Service Desk portal referencing Queue: Finance-IT-Support.
 
 Maintainer: Accounts Payable Center of Excellence (CoE)
 Version: 1.0.0
+
